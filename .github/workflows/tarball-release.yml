@@ -1,4 +1,4 @@
-name: Build Rust Release Tarball
+name: Build Tarball Release
 
 on:
   push:

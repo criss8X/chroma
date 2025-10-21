@@ -1,4 +1,4 @@
-name: Arch Package
+name: Build Arch Package
 
 on:
   push:
