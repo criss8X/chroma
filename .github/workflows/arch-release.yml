@@ -30,8 +30,12 @@ jobs:
             makepkg -sf --noconfirm
           "
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload packages to GitHub Releases
+        uses: softprops/action-gh-release@v2
         with:
-          name: archlinux-pkg-${GITHUB_REF_NAME}
-          path: "packaging/arch/*.pkg.tar.zst"
+          tag_name: ${{ github.ref_name }}
+          files: |
+            packaging/arch/*.pkg.tar.zst
+          append_body: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
