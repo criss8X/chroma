@@ -21,16 +21,13 @@ jobs:
       - name: Build release
         run: cargo build --release
 
-      - name: Prepare tarball
+      - name: Create tar.gz
         run: |
-          mkdir -p dist/chroma
-          cp target/release/* dist/chroma/
-          cp README.md LICENSE dist/chroma/
           VERSION=${{ github.ref_name }}
-          tar -czvf dist/chroma-v$VERSION.tar.gz -C dist chroma
+          tar -czvf target/chroma-v$VERSION.tar.gz -C target release
 
-      - name: Upload release artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: chroma-tarball
-          path: dist/chroma-v*.tar.gz
+          path: target/chroma-v*.tar.gz
