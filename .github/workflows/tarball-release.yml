@@ -1,0 +1,36 @@
+name: Build Rust Release Tarball
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build release
+        run: cargo build --release
+
+      - name: Prepare tarball
+        run: |
+          mkdir -p dist/chroma
+          cp target/release/chroma dist/chroma/
+          cp README.md LICENSE dist/chroma/
+          VERSION=${GITHUB_REF_NAME#v}
+          tar -czvf dist/chroma-v$VERSION.tar.gz -C dist chroma
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: chroma-tarball
+          path: dist/chroma-v*.tar.gz
