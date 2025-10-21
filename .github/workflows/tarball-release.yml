@@ -24,9 +24,9 @@ jobs:
       - name: Prepare tarball
         run: |
           mkdir -p dist/chroma
-          cp target/release/chroma dist/chroma/
+          cp target/release/* dist/chroma/
           cp README.md LICENSE dist/chroma/
-          VERSION=${GITHUB_REF_NAME#v}
+          VERSION=${{ github.ref_name }}
           tar -czvf dist/chroma-v$VERSION.tar.gz -C dist chroma
 
       - name: Upload release artifact
