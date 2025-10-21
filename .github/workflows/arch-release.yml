@@ -33,5 +33,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: archlinux-pkg
+          name: archlinux-pkg-${GITHUB_REF_NAME}
           path: "packaging/arch/*.pkg.tar.zst"
