@@ -30,7 +30,7 @@ jobs:
           tar -czvf dist/chroma-v$VERSION.tar.gz -C dist chroma
 
       - name: Upload release artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: chroma-tarball
           path: dist/chroma-v*.tar.gz
