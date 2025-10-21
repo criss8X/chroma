@@ -15,8 +15,7 @@ jobs:
         run: sudo apt install arch-install-scripts -y
       - name: Build package
         run: |
-          mkdir archpkg && cp PKGBUILD archpkg/
-          cd archpkg
+          cd packaging/arch
           makepkg -sf --noconfirm
       - name: Upload package
         uses: actions/upload-artifact@v4
