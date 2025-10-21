@@ -21,7 +21,7 @@ jobs:
         run: |
           useradd -m builder
           echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-          chown -R builder:builder /__w
+          chown -R builder:builder "$GITHUB_WORKSPACE"
 
       - name: Build Arch Package
         run: |
