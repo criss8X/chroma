@@ -1,0 +1,25 @@
+name: Arch Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-arch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Arch container tools
+        run: sudo apt install arch-install-scripts -y
+      - name: Build package
+        run: |
+          mkdir archpkg && cp PKGBUILD archpkg/
+          cd archpkg
+          makepkg -sf --noconfirm
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: archlinux-pkg
+          path: "*.pkg.tar.zst"
