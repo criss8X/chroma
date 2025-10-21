@@ -19,9 +19,7 @@ jobs:
 
       - name: Build Arch package
         run: |
-          mkdir -p packaging/archpkg
-          cp packaging/arch/PKGBUILD packaging/archpkg/
-          cd packaging/archpkg
+          cd packaging/arch
           makepkg -sf --noconfirm
 
       - name: Upload package artifact
