@@ -26,8 +26,11 @@ jobs:
           VERSION=${{ github.ref_name }}
           tar -czvf target/chroma-v$VERSION.tar.gz -C target release
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: chroma-tarball
-          path: target/chroma-v*.tar.gz
+          tag_name: ${{ github.ref_name }}
+          name: chroma-v${{ github.ref_name }}
+          files: target/chroma-v${{ github.ref_name }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
